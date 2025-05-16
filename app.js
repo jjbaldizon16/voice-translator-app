@@ -28,18 +28,32 @@ recognition.onerror = (event) => {
 };
 
 async function translateText(text, from, to) {
-  const res = await fetch("https://libretranslate.de/translate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      q: text,
-      source: from,
-      target: to,
-      format: "text"
-    })
-  });
-  const data = await res.json();
-  return data.translatedText;
+  const proxy = "https://corsproxy.io/?";
+  const api = "https://translate.argosopentech.com/translate";
+
+  try {
+    const res = await fetch(proxy + api, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        q: text,
+        source: from,
+        target: to,
+        format: "text"
+      })
+    });
+
+    if (!res.ok) {
+      throw new Error("Translation failed with status: " + res.status);
+    }
+
+    const data = await res.json();
+    return data.translatedText || "No translation returned.";
+  } catch (err) {
+    console.error("Translation error:", err);
+    alert("Translation failed: " + err.message);
+    return "[Translation error]";
+  }
 }
 
 function speakText(text, langCode) {
