@@ -28,11 +28,12 @@ recognition.onerror = (event) => {
 };
 
 async function translateText(text, from, to) {
-  const proxy = "https://corsproxy.io/?";
-  const api = "https://translate.argosopentech.com/translate";
+  const proxy = "https://api.allorigins.win/raw?url=";
+  const apiUrl = "https://translate.argosopentech.com/translate";
+  const fullUrl = proxy + encodeURIComponent(apiUrl);
 
   try {
-    const res = await fetch(proxy + api, {
+    const res = await fetch(fullUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
