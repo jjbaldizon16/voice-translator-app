@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Voice Translator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Voice Translator</h1>
+
+    <select id="fromLang">
+      <option value="en">English</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+    </select>
+
+    <select id="toLang">
+      <option value="es">Spanish</option>
+      <option value="en">English</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+    </select>
+
+    <button id="start">🎙️ Start Speaking</button>
+
+    <p><strong>You said:</strong> <span id="originalText"></span></p>
+    <p><strong>Translation:</strong> <span id="translatedText"></span></p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
